@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+type bot interface { // New custom type called 'bot'
+	getGreeting() string
+}
+
 // Just making each of the bots a struct so I can create some functions to work with it. Thus, not associating any properties/fields
 type englishBot struct{}
 type spanishBot struct{}
@@ -14,12 +18,8 @@ func main() {
 	printGreeting(sb)
 }
 
-func printGreeting(eb englishBot) {
-	fmt.Println(eb.getGreeting())
-}
-
-func printGreeting(sb spanishBot) { // Go doesn't support overloading so the current project won't compile for now
-	fmt.Println(sb.getGreeting())
+func printGreeting(b bot) {
+	fmt.Println(b.getGreeting())
 }
 
 // func (eb englishBot) getGreeting() string { // Since we're not using eb, we can remove it entirely and just leave the receiver type right here
@@ -50,3 +50,14 @@ func (spanishBot) getGreeting() string { // Omitted sb for the same reason for e
 //       func (s []int) shuffle() - can only shuffle a value of type '[]int'
 //    NO! And this is in part one of the problems that interfaces is trying to solve for us. I.e. to make it a little bit easier for us to reuse code between different parts of our codebase
 //    Allowing there to be no need to write out the same identical logic again and again and again when the only difference is just the type that we are using as a receiver right there
+//
+// 2. Our program has two different bot structs, namely englishBot and spanishBot structs, each has their own getGreeting() function...
+//    By declaring the...
+//       type bot interface
+//    ..., we're basically saying:
+//    To whom it may concern...
+//    Our program has a new type called 'bot'
+//       getGreeting() string
+//    If you're a type in this program with a function called 'getGreeting' and you return a string then you're now a honorary member of type 'bot'
+//    Now that you're also an honorary member of type 'bot', you can now call this function called 'printGreeting'
+//       func printGreeting(b bot)
