@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-type bot interface { // New custom type called 'bot'
+type bot interface { // New custom type called 'bot'. Check out the break down of syntax in the note's point 3
 	getGreeting() string
 }
 
@@ -61,3 +61,29 @@ func (spanishBot) getGreeting() string { // Omitted sb for the same reason for e
 //    If you're a type in this program with a function called 'getGreeting' and you return a string then you're now a honorary member of type 'bot'
 //    Now that you're also an honorary member of type 'bot', you can now call this function called 'printGreeting'
 //       func printGreeting(b bot)
+//
+// 3. Added some arbitrary arguments to drill down to more info
+//    type bot interface {
+//       getGreeting(string, int) (string, error)
+//    }
+//    the bot there is the interface name
+//    getGreeting is the function name
+//    (string, int) is the list of argument types
+//    (string, error) is the list of return types
+//
+//    We can also specify more functions in the type bot like:
+//    type bot interface {
+//       getGreeting(string, int) (string, error)
+//       getBotVersion() float64
+//       respondToUser(user) string
+//    }
+//
+// 4. Different Types
+//    * Concrete Type - something that we can actually kind of create a value out of it directly and then access it and change it and create new copies of it and whatnot
+//       - map
+//       - struct
+//       - int
+//       - string
+//       - englishBot
+//    * Interface Type - we can't actually create a value directly out of this type
+//       - bot
