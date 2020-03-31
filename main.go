@@ -87,3 +87,9 @@ func (spanishBot) getGreeting() string { // Omitted sb for the same reason for e
 //       - englishBot
 //    * Interface Type - we can't actually create a value directly out of this type
 //       - bot
+//
+// 5. Interfaces are...
+//    -   not generic types - other languages have 'generic' types, but Go (famously) doesn't
+//    -   'implicit' - we don't manually have to say that our custom type satisfies some interface
+//    -   a contract to help us manage types - GARBAGE IN, GARBAGE OUT. If our custom type's implementation of a function is broken then interfaces won't help us
+//    -   tough. Step #1 is understanding how to read them - understand how to read interfaces in the standard lib. Writing your own interfaces is tough and requires experience
